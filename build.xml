@@ -116,14 +116,14 @@
 
     <target name="phpcs"
          description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
-        <exec executable="phpcs">
+        <exec executable="${build-dir}/vendor/bin/phpcs">
             <arg value="--standard=${build-dir}/phpcs.xml" />
             <arg path="${src-dir}" />
         </exec>
     </target>
 
     <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
-        <exec executable="phpcs" output="/dev/null">
+        <exec executable="${build-dir}/vendor/bin/phpcs" output="/dev/null">
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${build-dir}/logs/checkstyle.xml" />
             <arg value="--standard=${build-dir}/phpcs.xml" />
@@ -165,7 +165,7 @@
     </target>
 
     <target name="phpunit" description="Run unit tests with PHPUnit">
-        <exec executable="phpunit" failonerror="true">
+        <exec executable="${build-dir}/vendor/bin/phpunit" failonerror="true">
             <arg value="-c" />
             <arg value="${basedir}/phpunit.xml.dist" />
             <arg value="--coverage-html" />
